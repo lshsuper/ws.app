@@ -31,10 +31,12 @@
         _create: function (opt) {
             //_opts.openEvent,_opts.messageEvent,_opts.closeEvent,_opts.errorEvent
             try {
-                if ("WebSocket" in window) {
+                if (typeof WebSocket != 'undefined') {
                     this._conn = new WebSocket(opt.url);
                     this._event(opt);
 
+                }else{
+                    alert("当前客户端不支持websocket...")
                 }
             } catch (error) {
                 this._reconn(opt);
