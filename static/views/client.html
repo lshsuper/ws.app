@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户端测试</title>
+    <script src="/static/ws.js"></script>
+</head>
+
+<body>
+
+
+<div id="panel">
+
+</div>
+
+<label for="msg">消息内容：</label>
+<textarea id="msg"></textarea>
+<button id="send">send</button>
+
+
+<script>
+
+    var panel = document.getElementById("panel");
+    var send = document.getElementById("send");
+    var _session = _wsFactory.init({
+
+        _url: "ws://localhost:8080/chat",
+        _open: function () {
+            console.log("conn...");
+        },
+        _message: function (e) {
+            //console.log(e.data)
+            if (e.data != "pong") {
+                panel.innerHTML += e.data + "<br/>"
+            }
+
+        },
+        _error: function (e) { },
+        _close: function (e) { },
+
+    });
+
+
+
+
+    send.onclick = function () {
+
+        var msg = document.getElementById("msg");
+        _session._sendTxt(msg.value);
+
+    }
+
+
+
+
+</script>
+
+</body>
+
+</html>
