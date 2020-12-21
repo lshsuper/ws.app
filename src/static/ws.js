@@ -1,5 +1,5 @@
 
-(function (_client) {
+(function () {
 
 
     //websocket-session链接对象
